@@ -25,6 +25,7 @@ function postPhone() {
 function getPhone() {
     // 1. 어디에
     let phoneListBox = document.querySelector('#phoneListBox');
+    let html = '';
 
     // 2. 무엇을
     phonebookDB.forEach(phone => {
