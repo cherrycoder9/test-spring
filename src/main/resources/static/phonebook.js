@@ -67,7 +67,7 @@ function getPhone() {
             // 3. 출력
             phoneListBox.innerHTML = html;
         }
-    } // ajax 통신 option 설정 end
+    }; // ajax 통신 option 설정 end
 
     // ajax 실행 함수
     $.ajax(option);
