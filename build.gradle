@@ -24,9 +24,17 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
     // MySQL 라이브러리
     runtimeOnly 'com.mysql:mysql-connector-j'
 
+    // .jsp 파일 매핑 라이브러리
+    // implementation "org.apache.tomcat.embed:tomcat-embed-jasper"
+
+    // 타임리프 라이브러리
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 tasks.named('test') {
