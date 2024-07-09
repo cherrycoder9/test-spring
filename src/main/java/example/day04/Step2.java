@@ -1,6 +1,7 @@
 package example.day04;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class Step2 {
     public static void main(String[] args) {
@@ -66,5 +67,47 @@ public class Step2 {
                 System.out.println(colsStr[j]);
             }
         }
-    }
-}
+
+        // [6] 문자열.indexOf() : 문자열 내 찾을 문자가 존재하면 찾은 문자열의 인덱스 반환, 없으면 -1 반환
+        String subject = "자바 프로그래밍 언어";
+        int findIndex = subject.indexOf("프로");
+        System.out.println("findIndex = " + findIndex); // 3
+
+        // [7] 문자열.contains() : 문자열 내 찾을 문자가 존재하면 true 반환 없으면 false 반환
+        boolean findCheck = subject.contains("자바");
+        System.out.println("findCheck = " + findCheck); // 자바: true, 프로: true, 파이썬: false
+
+        // [8] 문자열.getBytes   : 문자열 내 문자 하나씩 바이트로 변환된 바이트 배열로 반환
+        byte[] bytes = subject.getBytes();
+        System.out.println("Arrays.toString(bytes) = " + Arrays.toString(bytes));
+
+        // 문자char와 바이트의 관계
+        // 1. 영문/특정 특수문자: 문자 1개당 1바이트
+        // 2. 한글: 문자1개당 2바이트 + 규칙1바이트 => 총 3바이트
+        byte _byte1 = 'a';
+        System.out.println("_byte1 = " + _byte1);
+        _byte1++;
+        System.out.println("_byte1 = " + _byte1);
+        System.out.println("(char)_byte1 = " + (char) _byte1);
+
+        System.out.println("a".length());
+        System.out.println("가".length());
+        System.out.println("a".getBytes().length); // 배열은 length 소괄호를 안씀
+        System.out.println("가".getBytes().length);
+        // char: 문자 1개 표현, 65536글자 표현
+        // 부호:signed 부호없음:unsigned
+        char _char = '가';
+        System.out.println("_char = " + _char); // 가
+        System.out.println("(int)_char = " + (int) _char); // 44032
+
+        char _char2 = 'a';
+        System.out.println("(int)_char2 = " + (int) _char2);
+
+        // 활용
+        String newPwd = "";
+        for (int i = 0; i < 10; i++) {
+            newPwd += (char) (new Random().nextInt(26) + 97);
+            System.out.println(newPwd);
+        }
+    } // main end
+} // class end
