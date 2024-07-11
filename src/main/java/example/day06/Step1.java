@@ -96,6 +96,7 @@ public class Step1 {
         ////////////////////
         Person p2 = new Person();
         System.out.println("p2 = " + p2);
+        
 
         try {
             Class pClass = Class.forName("example.day06.Person");
