@@ -24,4 +24,12 @@ public class RestDto {
     public void setKey2(String key2) {
         this.key2 = key2;
     }
+
+    @Override
+    public String toString() {
+        return "RestDto{" +
+                "key1='" + key1 + '\'' +
+                ", key2='" + key2 + '\'' +
+                '}';
+    }
 }
