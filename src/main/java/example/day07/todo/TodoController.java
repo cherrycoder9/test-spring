@@ -14,8 +14,15 @@ public class TodoController {
         return tDao.getTodos();
     }
 
+    @PostMapping("/create")
+    public boolean postTodos(@RequestParam("todo") final String todo) {
+        System.out.println("todo = " + todo);
+        return tDao.postTodos(todo);
+    }
+
     @PutMapping("/update")
     public boolean putTodos(@RequestParam("id") final int id) {
+        System.out.println("id = " + id);
         return tDao.putTodos(id);
     }
 }

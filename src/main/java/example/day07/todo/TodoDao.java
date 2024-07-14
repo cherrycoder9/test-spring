@@ -3,10 +3,7 @@ package example.day07.todo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,10 +49,41 @@ public class TodoDao {
         return null;
     }
 
-    // 투두리스트 completed 상태 변경하기
-    public boolean putDotos(int id) {
-        
+    // 투두리스트 추가하기
+    public boolean postTodos(final String todo) {
+        final String sql = "insert into todo(todo) values(?)";
+        try {
+            final PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, todo);
+            ps.executeUpdate();
+            return true;
+        } catch (final SQLException e) {
+            log.error("e: ", e);
+        }
+        return false;
+    }
 
+    // 투두리스트 completed 상태 변경하기
+    public boolean putTodos(final int id) {
+        final String sql1 = "select completed from todo where id = ?";
+        final String sql2 = "update todo set completed = ? where id = ?";
+
+        try (final PreparedStatement ps1 = conn.prepareStatement(sql1)) {
+            ps1.setInt(1, id);
+            try (final ResultSet rs1 = ps1.executeQuery()) {
+                if (rs1.next()) {
+                    final int completed = rs1.getInt("completed");
+                    try (final PreparedStatement ps2 = conn.prepareStatement(sql2)) {
+                        ps2.setInt(1, completed == 0 ? 1 : 0);
+                        ps2.setInt(2, id);
+                        ps2.executeUpdate();
+                        return true;
+                    }
+                }
+            }
+        } catch (final Exception e) {
+            log.error("e: ", e);
+        }
         return false;
     }
 }

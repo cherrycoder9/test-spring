@@ -2,18 +2,24 @@ let todoList = [];
 
 function add() {
     let todoInput = document.querySelector('#todoList');
-
     let todo = todoInput.value;
-    todoList.push(todo);
-    todoSwitch.push(0);
 
-    alert('등록완료 ');
-
+    $.ajax({
+        method: "post",
+        url: "/todos/create",
+        data: {
+            todo: todo
+        },
+        success: function (resp) {
+            if (resp) {
+                alert('등록 완료');
+                print();
+            } else {
+                alert('등록 안됨');
+            }
+        }
+    });
     todoInput.value = null;
-
-    print();
-    console.log(todoSwitch); // 콘솔 로그 테스트 // 콘솔 로그 테스트
-
 }
 
 function print() {
@@ -60,6 +66,7 @@ function remove(index) {
 
 function update(index) {
     console.log("update()");
+    console.log(typeof index);
     $.ajax({
         method: "put",
         url: "/todos/update",
@@ -68,10 +75,10 @@ function update(index) {
         },
         success: function (resp) {
             if (resp) {
-                console.log("성공적으로 삭제됨");
+                console.log("성공적으로 변경됨");
                 print();
             } else {
-                console.log("삭제 안됨");
+                console.log("변경 안됨");
             }
         }
     });
