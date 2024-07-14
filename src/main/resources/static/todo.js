@@ -17,38 +17,43 @@ function add() {
 
 }
 
+function print() {
+    console.log("print()");
+    $.ajax({
+        method: "get",
+        url: "/todo/list",  // 백엔드 서버 주소를 정확히 지정
+        success: function (data) {
+            console.log(data);
+            todoList = data;  // 받아온 데이터를 todoList에 저장
+            renderTodoList();  // 데이터를 화면에 표시
+        },
+        error: function (xhr, status, error) {
+            console.error("Error:", status, error);
+        }
+    });
+}
 
-function print(index) {
+function renderTodoList() {
     let html = ``;
     for (let i = 0; i < todoList.length; i++) {
         let currentTodo = todoList[i];
-        if (todoSwitch[i] == 0) {
-            html += `
-                <div class="willTodo">
-                    <div>${currentTodo}</div>
-                    <div>
-                        <button onclick="update(${i})">변경</button>
-                        <button onclick="remove(${i})">삭제</button>
-                    </div>   
-                </div>
-                `;
-        }
-        else {
-            html += `
-                <div class="doneTodo">
-                    <div>${currentTodo}</div>
-                    <div>
-                        <button onclick="update(${i})">변경</button>
-                        <button onclick="remove(${i})">삭제</button>
-                    </div>   
-                </div>
-            `;
-        }
+        html += `
+            <div class="${currentTodo.completed ? 'doneTodo' : 'willTodo'}">
+                <div>${currentTodo.todo}</div>
+                <div>
+                    <button onclick="update(${currentTodo.tno})">변경</button>
+                    <button onclick="remove(${currentTodo.tno})">삭제</button>
+                </div>   
+            </div>
+        `;
     }
-    tableBox.innerHTML = html;
-    console.log(todoSwitch); // 콘솔 로그 테스트 // 콘솔 로그 테스트
+    document.getElementById('tableBox').innerHTML = html;
 }
 
+// 페이지 로드 시 데이터 가져오기
+$(document).ready(function () {
+    print();
+});
 
 function remove(index) {
     todoList.splice(index, 1);
