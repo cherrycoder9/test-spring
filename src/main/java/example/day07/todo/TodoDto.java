@@ -2,39 +2,33 @@ package example.day07.todo;
 
 public class TodoDto {
     private int tno;
-    private String content;
+    private String todo;
     private int completed;
 
     public TodoDto() {
-    }
-
-    public TodoDto(int tno, String content, int completed) {
-        this.tno = tno;
-        this.content = content;
-        this.completed = completed;
     }
 
     public int getTno() {
         return tno;
     }
 
-    public void setTno(int tno) {
+    public void setTno(final int tno) {
         this.tno = tno;
     }
 
-    public String getContent() {
-        return content;
+    public String getTodo() {
+        return todo;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setTodo(final String todo) {
+        this.todo = todo;
     }
 
     public int getCompleted() {
         return completed;
     }
 
-    public void setCompleted(int completed) {
+    public void setCompleted(final int completed) {
         this.completed = completed;
     }
 
@@ -42,7 +36,7 @@ public class TodoDto {
     public String toString() {
         return "TodoDto{" +
                 "tno=" + tno +
-                ", content='" + content + '\'' +
+                ", todo='" + todo + '\'' +
                 ", completed=" + completed +
                 '}';
     }
