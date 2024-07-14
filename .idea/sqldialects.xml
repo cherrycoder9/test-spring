@@ -3,6 +3,8 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/src/main/java/example/day02/consolemvc/model/dao/PhoneDao.java" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/example/day02/springwebmvc/model/dao/PhoneDao.java" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/example/day07/todo/TodoDao.java" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/example/day07/todo/todo.sql" dialect="MySQL" />
+    <file url="PROJECT" dialect="MySQL" />
   </component>
 </project>

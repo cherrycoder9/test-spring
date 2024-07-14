@@ -1,19 +1,25 @@
 package example.day07.todo;
 
 public class TodoDto {
-    private int tno;
+    private int id;
     private String todo;
     private int completed;
 
     public TodoDto() {
     }
 
-    public int getTno() {
-        return tno;
+    public TodoDto(final int id, final String todo, final int completed) {
+        this.id = id;
+        this.todo = todo;
+        this.completed = completed;
     }
 
-    public void setTno(final int tno) {
-        this.tno = tno;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(final int id) {
+        this.id = id;
     }
 
     public String getTodo() {
@@ -35,7 +41,7 @@ public class TodoDto {
     @Override
     public String toString() {
         return "TodoDto{" +
-                "tno=" + tno +
+                "id=" + id +
                 ", todo='" + todo + '\'' +
                 ", completed=" + completed +
                 '}';

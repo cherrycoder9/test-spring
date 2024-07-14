@@ -1,5 +1,4 @@
 let todoList = [];
-let todoSwitch = [];
 
 function add() {
     let todoInput = document.querySelector('#todoList');
@@ -21,14 +20,11 @@ function print() {
     console.log("print()");
     $.ajax({
         method: "get",
-        url: "/todo/list",  // 백엔드 서버 주소를 정확히 지정
+        url: "/todos",  // 백엔드 서버 주소를 정확히 지정
         success: function (data) {
             console.log(data);
             todoList = data;  // 받아온 데이터를 todoList에 저장
             renderTodoList();  // 데이터를 화면에 표시
-        },
-        error: function (xhr, status, error) {
-            console.error("Error:", status, error);
         }
     });
 }
@@ -41,8 +37,8 @@ function renderTodoList() {
             <div class="${currentTodo.completed ? 'doneTodo' : 'willTodo'}">
                 <div>${currentTodo.todo}</div>
                 <div>
-                    <button onclick="update(${currentTodo.tno})">변경</button>
-                    <button onclick="remove(${currentTodo.tno})">삭제</button>
+                    <button onclick="update(${currentTodo.id})">변경</button>
+                    <button onclick="remove(${currentTodo.id})">삭제</button>
                 </div>   
             </div>
         `;
@@ -51,9 +47,7 @@ function renderTodoList() {
 }
 
 // 페이지 로드 시 데이터 가져오기
-$(document).ready(function () {
-    print();
-});
+print();
 
 function remove(index) {
     todoList.splice(index, 1);
@@ -65,10 +59,20 @@ function remove(index) {
 }
 
 function update(index) {
-    if (todoSwitch[index] == 0) {
-        todoSwitch[index] = 1;
-        print(index);
-    }
-    else { todoSwitch[index] = 0; print(index); }
-    console.log(todoSwitch); // 콘솔 로그 테스트 // 콘솔 로그 테스트
+    console.log("update()");
+    $.ajax({
+        method: "put",
+        url: "/todos/update",
+        data: {
+            id: index
+        },
+        success: function (resp) {
+            if (resp) {
+                console.log("성공적으로 삭제됨");
+                print();
+            } else {
+                console.log("삭제 안됨");
+            }
+        }
+    });
 }

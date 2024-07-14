@@ -5,6 +5,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +31,31 @@ public class TodoDao {
         return tDao;
     }
 
+    // 투두리스트 DB 가져오기
     public List<TodoDto> getTodos() {
         final List<TodoDto> todos = new ArrayList<>();
+        try {
+            final String sql = "select * from todo";
+            final PreparedStatement ps = conn.prepareStatement(sql);
+            final ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                final int id = rs.getInt("id");
+                final String todo = rs.getString("todo");
+                final int completed = rs.getInt("completed");
+                final TodoDto todoDto = new TodoDto(id, todo, completed);
+                todos.add(todoDto);
+            }
+            return todos;
+        } catch (final Exception e) {
+            log.error("e: ", e);
+        }
         return null;
+    }
+
+    // 투두리스트 completed 상태 변경하기
+    public boolean putDotos(int id) {
+        
+
+        return false;
     }
 }
