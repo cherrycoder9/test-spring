@@ -72,7 +72,6 @@ function remove(index) {
             }
         }
     });
-
 }
 
 function update(index) {
