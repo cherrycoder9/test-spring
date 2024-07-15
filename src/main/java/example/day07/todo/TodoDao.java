@@ -86,4 +86,18 @@ public class TodoDao {
         }
         return false;
     }
+
+    // 투두리스트 삭제하기
+    public boolean deleteTodos(final int id) {
+        final String sql = "delete from todo where id = ?";
+        try {
+            final PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            return true;
+        } catch (final SQLException e) {
+            log.error("e: ", e);
+        }
+        return false;
+    }
 }

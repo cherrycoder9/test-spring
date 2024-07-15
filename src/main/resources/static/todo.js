@@ -56,11 +56,22 @@ function renderTodoList() {
 print();
 
 function remove(index) {
-    todoList.splice(index, 1);
-    todoSwitch.splice(index, 1);
-    console.log(todoSwitch); // 콘솔 로그 테스트 // 콘솔 로그 테스트
-    print();
-    alert('삭제완료');
+    console.log("remove()");
+    $.ajax({
+        method: "delete",
+        url: "/todos/delete",
+        data: {
+            id: index
+        },
+        success: function (resp) {
+            if (resp) {
+                alert("삭제 완료");
+                print();
+            } else {
+                alert("삭제 실패");
+            }
+        }
+    });
 
 }
 

@@ -25,4 +25,10 @@ public class TodoController {
         System.out.println("id = " + id);
         return tDao.putTodos(id);
     }
+
+    @DeleteMapping("/delete")
+    public boolean deleteTodos(@RequestParam("id") final int id) {
+        System.out.println("id = " + id);
+        return tDao.deleteTodos(id);
+    }
 }
