@@ -25,5 +25,18 @@ VALUES ('todo1', 0),
        ('todo9', 0),
        ('todo10', 0);
 
+DELETE
+FROM todo;
+
+TRUNCATE TABLE todo;
+
+DELETE
+FROM todo
+WHERE completed = 0;
+
+SELECT *
+FROM todo
+ORDER BY completed;
+
 SELECT *
 FROM todo;

@@ -1,12 +1,15 @@
 let todoList = [];
 
 function add() {
+    console.log("add()");
     let todoInput = document.querySelector('#todoList');
+    console.log(todoInput);
     let todo = todoInput.value;
+    console.log(todo);
 
     $.ajax({
-        method: "post",
-        url: "/todos/create",
+        method: "post", // HTTP 메소드 선택
+        url: "/todos/create", // HTTP 통신할 경로 작성
         data: {
             todo: todo
         },
@@ -19,13 +22,13 @@ function add() {
             }
         }
     });
-    todoInput.value = null;
+    todoInput.value = "";
 }
 
 function print() {
     console.log("print()");
     $.ajax({
-        method: "get",
+        method: "get", // HTTP 메소드 선택
         url: "/todos",  // 백엔드 서버 주소를 정확히 지정
         success: function (data) {
             console.log(data);
@@ -58,8 +61,8 @@ print();
 function remove(index) {
     console.log("remove()");
     $.ajax({
-        method: "delete",
-        url: "/todos/delete",
+        method: "delete", // HTTP 메소드 선택
+        url: "/todos/delete", // HTTP 통신할 경로 작성
         data: {
             id: index
         },
@@ -78,8 +81,8 @@ function update(index) {
     console.log("update()");
     console.log(typeof index);
     $.ajax({
-        method: "put",
-        url: "/todos/update",
+        method: "put", // HTTP 메소드 선택
+        url: "/todos/update", // HTTP 통신할 경로 작성
         data: {
             id: index
         },
