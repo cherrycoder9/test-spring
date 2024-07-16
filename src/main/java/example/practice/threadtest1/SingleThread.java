@@ -1,5 +1,8 @@
 package example.practice.threadtest1;
 
+import lombok.Getter;
+
+@Getter
 public class SingleThread {
     private int startNum;
     private int endNum;
@@ -19,9 +22,4 @@ public class SingleThread {
             this.sum += ((i * 2L / 3) % 100);
         }
     }
-
-    public long getSum() {
-        return sum;
-    }
-
 }

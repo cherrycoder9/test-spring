@@ -1,7 +1,10 @@
 package example.practice.threadtest1;
 
+import lombok.Getter;
+
+@Getter
 public class SyncMultiThread extends Thread {
-    private static long totalSum = 0; // 공유
+    public static long totalSum = 0; // 공유
     private int startNum;
     private int endNum;
 
@@ -14,20 +17,20 @@ public class SyncMultiThread extends Thread {
         this.endNum = endNum;
     }
 
-    private static void addToTotalSum(final long sum) {
+    private static synchronized void addToTotalSum(final long sum) {
         totalSum += sum;
     }
 
-    static long getTotalSum() {
+    static synchronized long getTotalSum() {
         return totalSum;
     }
 
     @Override
-    public void run() {
+    public synchronized void run() {
         startCalc();
     }
 
-    public void startCalc() {
+    public synchronized void startCalc() {
         long sum = 0;
         for (int i = startNum; i <= endNum; i++) {
             sum += ((i * 2L / 3) % 100);

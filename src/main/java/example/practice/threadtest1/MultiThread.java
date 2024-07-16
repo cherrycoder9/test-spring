@@ -18,7 +18,7 @@ public class MultiThread extends Thread {
         totalSum += sum;
     }
 
-    private static long getTotalSum() {
+    static long getTotalSum() {
         return totalSum;
     }
 
@@ -32,5 +32,6 @@ public class MultiThread extends Thread {
         for (int i = startNum; i <= endNum; i++) {
             sum += ((i * 2L / 3) % 100);
         }
+        addToTotalSum(sum);
     }
 }

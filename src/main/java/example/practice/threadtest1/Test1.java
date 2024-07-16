@@ -5,7 +5,7 @@ public class Test1 {
         // 1부터 100만의 각 숫자를 2를 곱한 다음에 3을 나누어 ArrayList로 추가하는 프로그램
         // 싱글 스레드와 멀티스레드의 동작 시간을 측정해 콘솔 출력함
 
-        // 1 - 싱글스레드 측정 시작
+        // 1 - 싱글스레드 성능 측정 시작
         final long singleThreadStart = System.currentTimeMillis();
         final SingleThread st = new SingleThread(1, 1000000000);
         st.startCalc();
@@ -13,7 +13,7 @@ public class Test1 {
         final long singleThreadEnd = System.currentTimeMillis();
         System.out.println("싱글스레드 작업시간: " + (singleThreadEnd - singleThreadStart) + " ms");
 
-        // 2 - 멀티스레드 측정 시작
+        // 2 - 멀티스레드 성능 측정 시작
         final long multiThreadStart = System.currentTimeMillis();
         final MultiThread mt1 = new MultiThread(1, 200000000);
         final MultiThread mt2 = new MultiThread(200000001, 400000000);
@@ -30,12 +30,12 @@ public class Test1 {
         mt3.join();
         mt4.join();
         mt5.join();
-        final long totalSum = mt1.getSum() + mt2.getSum() + mt3.getSum() + mt4.getSum() + mt5.getSum();
+        final long totalSum = MultiThread.getTotalSum();
         System.out.println("멀티스레드 더하기 결과: " + totalSum);
         final long multiThreadEnd = System.currentTimeMillis();
         System.out.println("멀티스레드 작업시간: " + (multiThreadEnd - multiThreadStart) + " ms");
 
-        // 3 - 동기화 멀티스레드 측정 시작
+        // 3 - 동기화 멀티스레드 성능 측정 시작
         final long syncMultiThreadStart = System.currentTimeMillis();
         final SyncMultiThread smt1 = new SyncMultiThread(1, 200000000);
         final SyncMultiThread smt2 = new SyncMultiThread(200000001, 400000000);
@@ -52,7 +52,7 @@ public class Test1 {
         smt3.join();
         smt4.join();
         smt5.join();
-        final long totalSum2 = mt1.getSum() + mt2.getSum() + mt3.getSum() + mt4.getSum() + mt5.getSum();
+        final long totalSum2 = SyncMultiThread.getTotalSum();
         System.out.println("동기화 멀티스레드 더하기 결과: " + totalSum2);
         final long syncMultiThreadEnd = System.currentTimeMillis();
         System.out.println("동기화 멀티스레드 작업시간: " + (syncMultiThreadEnd - syncMultiThreadStart) + " ms");
