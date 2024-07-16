@@ -30,7 +30,7 @@ public class MultiThread extends Thread {
     public void startCalc() {
         long sum = 0;
         for (int i = startNum; i <= endNum; i++) {
-            sum += ((i * 2L / 3) % 100);
+            sum += ((i * 2L / 3) % 101);
         }
         addToTotalSum(sum);
     }

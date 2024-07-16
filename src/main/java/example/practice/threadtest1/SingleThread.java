@@ -19,7 +19,7 @@ public class SingleThread {
 
     public void startCalc() {
         for (int i = startNum; i <= endNum; i++) {
-            this.sum += ((i * 2L / 3) % 100);
+            this.sum += ((i * 2L / 3) % 101);
         }
     }
 }
