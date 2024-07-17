@@ -45,6 +45,7 @@ public class MyArrayList<T> {
     public T get(final int index) {
         // 잘못입력하면 null 반환
         if (index < 0 || index >= size) {
+            isNullMsg();
             return null;
         }
         // 잘 입력했으면 해당 인덱스의 값 반환
@@ -69,6 +70,10 @@ public class MyArrayList<T> {
 
     public void setSize(final int size) {
         this.size = size;
+    }
+
+    public void isNullMsg() {
+        System.out.println("null 값이 들어있습니다.");
     }
 
     @Override

@@ -12,5 +12,7 @@ public class AppStart {
         smal.add("하이");
         System.out.println(imal);
         System.out.println(smal);
+        System.out.println(smal.get(1));
+        smal.get(3);
     }
 }
