@@ -2,11 +2,15 @@ package example.day10.makegeneric;
 
 public class AppStart {
     public static void main(final String[] args) {
-        final MyArrayList<Integer> mal = new MyArrayList<>();
+        final MyArrayList<Integer> imal = new MyArrayList<>();
+        final MyArrayList<String> smal = new MyArrayList<>();
         for (int i = 0; i < 15; i++) {
-            mal.add(i);
+            imal.add(i);
         }
-        mal.remove(3);
-        System.out.println(mal);
+        imal.remove(3);
+        smal.add("안녕");
+        smal.add("하이");
+        System.out.println(imal);
+        System.out.println(smal);
     }
 }
