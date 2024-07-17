@@ -38,6 +38,8 @@ public class MyArrayList<T> {
             // 용량 검사후 감소 결정
             if (size < capacity / 2) {
                 this.capacity /= 2;
+                // 변경된 용량으로 배열 복사
+                this.arr = Arrays.copyOf(arr, capacity);
             }
         }
     }
