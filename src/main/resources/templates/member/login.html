@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>로그인 페이지</title>
+	<script defer src="https://code.jquery.com/jquery-latest.min.js"></script>
+	<script defer src="/js/member/login.js"></script>
+</head>
+
+<body>
+<div th:replace="~{/header.html::header}"></div>
+<form>
+	아이디: <input id="id" /><br>
+	비밀번호: <input id="pw" /><br>
+	<button onclick="doLogin()" type="button">로그인</button>
+</form>
+<div th:replace="~{/footer.html::footer}"></div>
+</body>
+
+</html>
