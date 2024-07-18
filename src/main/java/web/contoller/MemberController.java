@@ -84,4 +84,11 @@ public class MemberController {
         System.out.println("mDto = " + mDto);
         return mService.mFindpw(mDto);
     }
+
+    // 내정보 화면 출력 api
+    @GetMapping("/myinfo")
+    public MemberDto mMyinfo() {
+        System.out.println("MemberController.mMyinfo");
+        return mService.mMyinfo();
+    }
 }

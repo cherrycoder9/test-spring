@@ -42,6 +42,29 @@ public class MemberDao extends Dao {
         return 0; // 못찾음
     }
 
+    // 내정보 화면에 전송할 dao
+    public MemberDto mMyinfo(final int no) {
+        System.out.println("MemberDao.mMyinfo");
+        try {
+            final String sql = "select * from member where no = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, no);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                MemberDto mDto = new MemberDto();
+                mDto.setId(rs.getString("id"));
+                mDto.setName(rs.getString("name"));
+                mDto.setEmail(rs.getString("email"));
+                mDto.setPhone(rs.getString("phone"));
+                System.out.println(mDto);
+                return mDto;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
     // 아이디 찾기 dao
     public String mFindid(final MemberDto mDto) {
         System.out.println("MemberDao.mFindid");

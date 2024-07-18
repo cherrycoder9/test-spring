@@ -74,4 +74,12 @@ public class MemberService {
         return mDao.mFindpw(mDto);
     }
 
+    // 내정보 화면 service
+    public MemberDto mMyinfo() {
+        System.out.println("MemberService.mInfo");
+        int no = mLoginCheck().getNo();
+        System.out.println("MemberService:mMyinfo() no: " + no);
+        return mDao.mMyinfo(no);
+    }
+
 }

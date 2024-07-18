@@ -42,4 +42,11 @@ public class ViewController {
         return "member/findpw.html";
     }
 
+    // 내정보 page return (HTML)
+    @GetMapping("/member/mypage")
+    public String mMypage() {
+        System.out.println("ViewController.mMypage");
+        return "member/mypage.html";
+    }
+
 }

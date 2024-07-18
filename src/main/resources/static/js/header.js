@@ -26,3 +26,9 @@ function doLogout() {
     });
 
 }
+
+// mypage로 이동 
+function moveMypage() {
+    console.log("moveMypage()");
+    location.href = "/member/mypage.html";
+}
