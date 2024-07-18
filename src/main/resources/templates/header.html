@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Title</title>
+
 </head>
+
 <body>
-<div th:fragment="header">
-	<ul>
-		<li><a href="/">홈</a></li>
-		<li><a href="/member/login">로그인</a></li>
-		<li><a href="/member/signup">회원가입</a></li>
-	</ul>
-</div>
+	<div th:fragment="header">
+		<ul>
+			<li><a href="/">홈</a></li>
+			<li><a href="/member/login">로그인</a></li>
+			<li><a href="/member/signup">회원가입</a></li>
+			<li><a href="/member/signup">회원가입</a></li>
+			<li><a href="#" onclick="doLogout()">로그아웃</a></li>
+			<li><a href="">마이페이지</a></li>
+		</ul>
+		<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+		<script src="/js/header.js"></script>
+	</div>
 </body>
+
 </html>

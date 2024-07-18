@@ -5,7 +5,9 @@ import web.model.dto.MemberDto;
 
 @Component
 public class MemberDao extends Dao {
+    // 회원가입 dao
     public boolean mSignup(final MemberDto mDto) {
+        System.out.println("MemberDao.mSignup");
         try {
             final String sql = "insert into member(id, pw, name, email, phone) values(?, ?, ?, ?, ?)";
             ps = conn.prepareStatement(sql);
@@ -22,17 +24,57 @@ public class MemberDao extends Dao {
         return false;
     } // mSignup end
 
-    public boolean mLogin(final MemberDto mDto) {
+    // 로그인 dao : 로그인 성공한 회원번호 반환(세션에 저장하려고)
+    public int mLogin(final MemberDto mDto) {
+        System.out.println("MemberDao.mLogin");
         try {
             final String sql = "select * from member where id = ? and pw = ?";
             ps = conn.prepareStatement(sql);
             ps.setString(1, mDto.getId());
             ps.setString(2, mDto.getPw());
             rs = ps.executeQuery();
-            return rs.next();
+            if (rs.next()) {
+                return rs.getInt("no");
+            }
         } catch (final Exception e) {
             System.out.println(e);
         } // try end
-        return false;
+        return 0; // 못찾음
+    }
+
+    // 아이디 찾기 dao
+    public String mFindid(final MemberDto mDto) {
+        System.out.println("MemberDao.mFindid");
+        try {
+            final String sql = "select id from member where name = ? and phone = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, mDto.getName());
+            ps.setString(2, mDto.getPhone());
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("id");
+            }
+        } catch (final Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    // 비밀번호 찾기 dao
+    public String mFindpw(final MemberDto mDto) {
+        System.out.println("MemberDao.mFindpw");
+        try {
+            final String sql = "select pw from member where id = ? and phone = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, mDto.getId());
+            ps.setString(2, mDto.getPhone());
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("pw");
+            }
+        } catch (final Exception e) {
+            System.out.println(e);
+        }
+        return null;
     }
 }

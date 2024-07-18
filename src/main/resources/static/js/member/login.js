@@ -17,6 +17,7 @@ function doLogin() {
         success: function (resp) {
             if (resp) {
                 alert("로그인 성공");
+                console.log(resp);
                 location.href = "/";
             } else {
                 alert("로그인 실패");

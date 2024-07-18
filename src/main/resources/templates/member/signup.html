@@ -4,8 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>회원가입 페이지</title>
-	<script defer src="https://code.jquery.com/jquery-latest.min.js"></script>
-	<script defer src="/js/member/signup.js"></script>
+
 </head>
 
 <body>
@@ -19,7 +18,10 @@
 	연락처: <input id="phone" /><br>
 	<button onclick="doSignup()" type="button">회원가입</button>
 </form>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="/js/member/signup.js"></script>
 <div th:replace="~{/footer.html::footer}"></div>
+
 </body>
 
 </html>
