@@ -8,19 +8,18 @@
 </head>
 
 <body>
-<div th:replace="~{/header.html::header}"></div>
-회원가입 페이지
-<form>
-	아이디: <input id="id" /><br>
-	비밀번호: <input id="pw" /><br>
-	이름: <input id="name" /><br>
-	이메일: <input id="email" /><br>
-	연락처: <input id="phone" /><br>
-	<button onclick="doSignup()" type="button">회원가입</button>
-</form>
-<script src="https://code.jquery.com/jquery-latest.min.js"></script>
-<script src="/js/member/signup.js"></script>
-<div th:replace="~{/footer.html::footer}"></div>
+	<div th:replace="~{/header.html::header}"></div>
+	회원가입 페이지
+	<form>
+		아이디: <input id="id" /><br>
+		비밀번호: <input id="pw" /><br>
+		이름: <input id="name" /><br>
+		이메일: <input id="email" /><br>
+		연락처: <input id="phone" /><br>
+		<button onclick="doSignup()" type="button">회원가입</button>
+	</form>
+	<script src="/js/member/signup.js"></script>
+	<div th:replace="~{/footer.html::footer}"></div>
 
 </body>
 

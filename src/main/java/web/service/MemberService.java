@@ -46,9 +46,11 @@ public class MemberService {
     public MemberDto mLoginCheck() {
         System.out.println("MemberService.mLoginCheck");
         HttpSession session = request.getSession();
-        MemberDto loginDto = (MemberDto) session.getAttribute("loginDto");
-        System.out.println("MemberService.mLoginCheck loginDto = " + loginDto);
-        return loginDto;
+        Object object = session.getAttribute("loginDto");
+        if (object != null) {
+            return (MemberDto) object;
+        }
+        return null;
     }
 
     // 로그아웃: 세션 초기화 service
@@ -77,9 +79,12 @@ public class MemberService {
     // 내정보 화면 service
     public MemberDto mMyinfo() {
         System.out.println("MemberService.mInfo");
-        int no = mLoginCheck().getNo();
-        System.out.println("MemberService:mMyinfo() no: " + no);
-        return mDao.mMyinfo(no);
+        // 빌더패턴: 생성자가 아닌 메소드를 이용한 방식의 객체 생성
+        MemberDto loginDto = mLoginCheck();
+        if (loginDto == null) {
+            return null;
+        } else {
+            return mDao.mMyinfo(loginDto.getNo());
+        }
     }
-
 }

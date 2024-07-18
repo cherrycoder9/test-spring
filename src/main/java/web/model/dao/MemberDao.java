@@ -52,6 +52,7 @@ public class MemberDao extends Dao {
             rs = ps.executeQuery();
             if (rs.next()) {
                 MemberDto mDto = new MemberDto();
+                mDto.setNo(rs.getInt("no"));
                 mDto.setId(rs.getString("id"));
                 mDto.setName(rs.getString("name"));
                 mDto.setEmail(rs.getString("email"));
