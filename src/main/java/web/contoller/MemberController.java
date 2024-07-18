@@ -20,7 +20,8 @@ public class MemberController {
             @RequestParam("pw") final String pw,
             @RequestParam("name") final String name,
             @RequestParam("email") final String email,
-            @RequestParam("phone") final String phone) {
+            @RequestParam("phone") final String phone
+    ) {
         System.out.println("MemberController.mSignup");
         final MemberDto mDto = new MemberDto();
         mDto.setId(id);
@@ -35,7 +36,8 @@ public class MemberController {
     @PostMapping("/login")
     public boolean mLogin(
             @RequestParam("id") final String id,
-            @RequestParam("pw") final String pw) {
+            @RequestParam("pw") final String pw
+    ) {
         System.out.println("MemberController.mLogin");
         final MemberDto mDto = new MemberDto();
         mDto.setId(id);

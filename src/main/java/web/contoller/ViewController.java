@@ -13,13 +13,22 @@ public class ViewController {
     }
 
     // ========== 2 - 회원 관련 ==============
+    // 회원가입
     @GetMapping("/member/signup")
     public String mSignup() {
         return "/member/signup.html"; // 템플릿 폴더내 반환할 경로와 파일명
     }
 
+    // 로그인
     @GetMapping("/member/login")
     public String mLogin() {
         return "/member/login.html"; // 템플릿 폴더내 반환할 경로와 파일명
     }
+
+    // 아이디 찾기
+
+
+    // 비밀번호 찾기
+
+
 }
