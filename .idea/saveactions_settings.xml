@@ -5,8 +5,11 @@
       <set>
         <option value="activate" />
         <option value="activateOnShortcut" />
+        <option value="activateOnBatch" />
         <option value="organizeImports" />
         <option value="reformat" />
+        <option value="fieldCanBeFinal" />
+        <option value="localCanBeFinal" />
         <option value="missingOverrideAnnotation" />
         <option value="useBlocks" />
         <option value="unnecessarySemicolon" />

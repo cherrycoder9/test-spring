@@ -10,7 +10,7 @@ import lombok.*;
 @Setter // 해당 클래스의 setter 메소드를 자동으로 주입/생성
 public class Member {
     // 필드
-    private String id;
+    private int id;
     private String name;
 
 }
