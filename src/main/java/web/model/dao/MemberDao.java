@@ -101,4 +101,19 @@ public class MemberDao extends Dao {
         }
         return null;
     }
+
+    // 아이디 중복검사 dao
+    public boolean mIdCheck(final String id) {
+        System.out.println("MemberDao.mIdCheck");
+        try {
+            final String sql = "select * from member where id =?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            return !rs.next();
+        } catch (final Exception e) {
+            System.out.println(e);
+        }
+        return false;
+    }
 }

@@ -91,4 +91,11 @@ public class MemberController {
         System.out.println("MemberController.mMyinfo");
         return mService.mMyinfo();
     }
+
+    // 아이디 중복검사 api
+    @GetMapping("/idcheck")
+    public boolean mIdCheck(@RequestParam("id") final String id) {
+        System.out.println("MemberController.mIdCheck");
+        return mService.mIdCheck(id);
+    }
 }

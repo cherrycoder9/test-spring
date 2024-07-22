@@ -87,4 +87,10 @@ public class MemberService {
             return mDao.mMyinfo(loginDto.getNo());
         }
     }
+
+    // 아이디 중복검사 service
+    public boolean mIdCheck(final String id) {
+        System.out.println("MemberService.mIdCheck");
+        return mDao.mIdCheck(id);
+    }
 }
