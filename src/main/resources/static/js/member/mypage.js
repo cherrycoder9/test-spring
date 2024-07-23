@@ -27,3 +27,13 @@ function mypage() {
         }
     });
 }
+
+function doModify() {
+    console.log("doModify()");
+    location.href = "/member/modify";
+}
+
+function doWithdraw() {
+    console.log("doWithdraw()");
+    location.href = "/member/withdraw";
+}

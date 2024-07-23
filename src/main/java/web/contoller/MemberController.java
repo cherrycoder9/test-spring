@@ -98,4 +98,27 @@ public class MemberController {
         System.out.println("MemberController.mIdCheck");
         return mService.mIdCheck(id);
     }
+
+    // 회원정보 수정 api
+    @PutMapping("/modify")
+    public boolean mModify(
+            @RequestParam("name") final String name,
+            @RequestParam("pw") final String pw,
+            @RequestParam("phone") final String phone
+    ) {
+        System.out.println("MemberController.mModify");
+        final MemberDto mDto = new MemberDto();
+        mDto.setName(name);
+        mDto.setPw(pw);
+        mDto.setPhone(phone);
+        System.out.println("mDto = " + mDto);
+        return mService.mModify(mDto);
+    }
+
+    // 회원탈퇴 api, 비밀번호를 입력받아 검증함
+    @DeleteMapping("/withdraw")
+    public boolean mWithdraw(@RequestParam("pw") final String pw) {
+        System.out.println("MemberController.mWithdrawal");
+        return mService.mWithdraw(pw);
+    }
 }

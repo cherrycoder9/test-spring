@@ -35,8 +35,8 @@ public class AuthService {
             // 2. 서버 세션에 인증 코드 시간 설정
             // 세션의 생명주기 (세션이 유지되는 시간)
             request.getSession().setMaxInactiveInterval(100);
-            // 3. 이메일로 전송
-            emailSend(email, "OOO 회원가입 인증코드", "인증번호: " + authCode);
+            // 3. 이메일로 전송, 일단 주석처리
+            // emailSend(email, "OOO 회원가입 인증코드", "인증번호: " + authCode);
             // 성공하면
             System.out.println("이메일 전송 성공");
             return true;

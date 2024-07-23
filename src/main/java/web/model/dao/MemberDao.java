@@ -51,7 +51,7 @@ public class MemberDao extends Dao {
             ps.setInt(1, no);
             rs = ps.executeQuery();
             if (rs.next()) {
-                MemberDto mDto = new MemberDto();
+                final MemberDto mDto = new MemberDto();
                 mDto.setNo(rs.getInt("no"));
                 mDto.setId(rs.getString("id"));
                 mDto.setName(rs.getString("name"));
@@ -60,7 +60,7 @@ public class MemberDao extends Dao {
                 System.out.println(mDto);
                 return mDto;
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             System.out.println(e);
         }
         return null;
@@ -111,6 +111,37 @@ public class MemberDao extends Dao {
             ps.setString(1, id);
             rs = ps.executeQuery();
             return !rs.next();
+        } catch (final Exception e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    // 회원정보 수정 dao
+    public boolean mModify(final MemberDto mDto) {
+        System.out.println("MemberDao.mModify");
+        try {
+            final String sql = "update member set name =?, pw =?, phone =? where no =?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, mDto.getName());
+            ps.setString(2, mDto.getPw());
+            ps.setString(3, mDto.getPhone());
+            ps.setInt(4, mDto.getNo());
+            return ps.executeUpdate() == 1;
+        } catch (final Exception e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    // 회원 탈퇴 dao
+    public boolean mWithdraw(MemberDto mDto) {
+        System.out.println("MemberDao.mWithdraw");
+        try {
+            final String sql = "delete from member where no =?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, mDto.getNo());
+            return ps.executeUpdate() == 1;
         } catch (final Exception e) {
             System.out.println(e);
         }

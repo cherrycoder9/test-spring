@@ -31,7 +31,7 @@ function idCheck() {
     // 3. 정규표현식 검사
     console.log(`글자제한: ${idReg.test(id)}`); // true/false
     let duplicate = false;
-    if (reg.test(id)) {
+    if (idReg.test(id)) {
         // 아이디 중복 검사 RestAPI
         $.ajax({
             async: false,
@@ -53,15 +53,20 @@ function idCheck() {
         if (duplicate) {
             console.log("아이디 중복");
             idCheckBox.innerHTML = "중복된 아이디입니다.";
+            checkArray[0] = false;
             return;
         } else {
             console.log("아이디 적합");
             idCheckBox.innerHTML = "사용 가능한 아이디입니다.";
+            checkArray[0] = true;
+            return;
         }
 
     } else {
         console.log("아이디 부적합");
         idCheckBox.innerHTML = "알파벳 대소문자와 숫자 조합의 5~30글자로 입력해주세요.";
+        checkArray[0] = false;
+        return;
     }
 }
 
@@ -80,10 +85,12 @@ function pwCheck() {
         if (pw === pwConfirm) {
             console.log("비밀번호 적합");
             pwCheckBox.innerHTML = "비밀번호가 일치합니다.";
+            checkArray[1] = true;
             return;
         } else {
             console.log("비밀번호 부적합");
             pwCheckBox.innerHTML = "비밀번호가 일치하지 않습니다.";
+            checkArray[1] = false;
             return;
         }
     }
@@ -98,9 +105,11 @@ function phoneCheck() {
     if (phoneReg.test(phone)) {
         console.log("전화번호 적합");
         phoneCheckBox.innerHTML = "전화번호가 적합합니다.";
+        checkArray[4] = true;
     } else {
         console.log("전화번호 부적합");
         phoneCheckBox.innerHTML = "전화번호가 적합하지 않습니다.";
+        checkArray[4] = false;
     }
 }
 
@@ -167,6 +176,7 @@ function doAuth() {
             verifyBtn.disabled = true;
             authBox.innerHTML = "인증 시간이 초과되었습니다.";
             authBtn.disabled = false;
+            checkArray[3] = false;
         }
     }, 1000);
 }
@@ -226,15 +236,18 @@ function doAuthCode() {
                 verifyBtn.disabled = true;
                 // 인증버튼 삭제
                 authBox.innerHTML = "인증되었습니다.";
+                checkArray[3] = true;
                 // 타이머 종료
                 clearInterval(interval);
                 // 인증버튼 활성화
                 authBtn.disabled = false;
+
             } else {
                 if (authCodeInput == "") {
                     alert("인증번호를 입력하세요.");
                 } else {
                     alert("인증번호가 불일치합니다.");
+                    checkArray[3] = false;
                 }
             }
         }
@@ -252,7 +265,6 @@ function emailCheck() {
     if (emailReg.test(email)) {
         console.log("이메일 적합");
         emailCheckBox.innerHTML = "이메일이 적합합니다.";
-        // 이메일 중복검사 생략
         // 이메일 인증검사
         // 인증버튼 활성화 
         authBtn.disabled = false;
@@ -264,8 +276,33 @@ function emailCheck() {
     }
 }
 
+// 아이디, 비밀번호, 이름, 이메일인증, 전화번호 유효성검사 체크 현황
+let checkArray = [false, false, true, false, false];
+
 // 회원가입
 function doSignup() {
+    // 유효성 검사 체크
+    if (checkArray[0] == false) {
+        alert("아이디를 입력하세요.");
+        return;
+    }
+    if (checkArray[1] == false) {
+        alert("비밀번호를 입력하세요.");
+        return;
+    }
+    if (checkArray[2] == false) {
+        alert("이름을 입력하세요.");
+        return;
+    }
+    if (checkArray[3] == false) {
+        alert("이메일을 인증하세요.");
+        return;
+    }
+    if (checkArray[4] == false) {
+        alert("전화번호를 입력하세요.");
+        return;
+    }
+
     console.log("doSignup()");
     let mId = document.querySelector('#id').value;
     let mPw = document.querySelector('#pw').value;
