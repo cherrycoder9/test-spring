@@ -91,6 +91,7 @@ function pwCheck() {
 
 // 전화번호 유효성 검사
 function phoneCheck() {
+    console.log("phoneCheck()");
     let phone = document.querySelector('#phone').value;
     let phoneCheckBox = document.querySelector('#phoneCheckBox');
     let phoneReg = /^([0-9]{2,3})+[-]([0-9]{3,4})+[-]([0-9]{4})$/;
@@ -103,14 +104,154 @@ function phoneCheck() {
     }
 }
 
+let authBtn = document.querySelector('#authBtn'); // 이메일 인증 버튼
+let interval = null; // 타이머 인터벌 변수
+
+// 이메일 인증 버튼 클릭시 실행할 함수
+function doAuth() {
+    console.log("doAuth()");
+    // AJAX 인증 번호 요청 통신
+    $.ajax({
+        async: false, // 동기식 
+        method: "get", // 요청 방식
+        url: "/auth/code", // 요청 URL
+        success: (result) => {
+            if (result) {
+                alert("인증 번호가 전송되었습니다.");
+            }
+        }
+    });
+
+
+    authBtn.disabled = true;
+
+    // 인증 번호 입력 구역 구성
+    let html = `
+        <span id="timerDisplay">01:40</span>
+        <input type="text" id="authCodeInput" />
+        <button type="button" id="verifyBtn" onclick="doAuthCode()">인증</button>
+    `;
+    // authBox 내부 HTML 구성
+    let authBox = document.getElementById('authBox');
+    authBox.innerHTML = html;
+
+    // 타이머 
+    let timer = 100; // 타이머 시간 (초)
+    // 인터벌 생성 (JS라이브러리): 특정 주기에 따라 함수를 실행함
+    interval = setInterval(() => {
+        // 분, 초 계산
+        let m = parseInt(timer / 60);
+        let s = timer % 60;
+        // 두자리수로 표현 
+        if (m < 10) {
+            m = "0" + m;
+        }
+        if (s < 10) {
+            s = "0" + s;
+        }
+        // 타이머 시간 감소
+        timer--;
+        console.log(timer);
+        // 타이머 시간 출력
+        let span = document.getElementById('timerDisplay');
+        span.innerHTML = `${m}:${s}`;
+        // 타이머 종료
+        if (timer < 0) {
+            clearInterval(interval);
+            // 인증버튼 비활성화
+            let verifyBtn = document.getElementById('verifyBtn');
+            verifyBtn.disabled = true;
+            authBox.innerHTML = "인증 시간이 초과되었습니다.";
+            authBtn.disabled = false;
+        }
+    }, 1000);
+}
+
+// 인증코드 인증 
+function doAuthCode() {
+    // 입력한 입력번호 가져오기 
+    let authCodeInput = document.getElementById('authCodeInput').value;
+    // 인증번호 비교
+    // 임의의 인증번호 (JS에서 인증번호를 관리하지 않는 이유: JS는 클라이언트로부터 오픈된 코드이기 때문에)
+    // let authCodeRandom = "123456";
+    // // 만약에 입력한 값이 인증번호와 동일하면
+    // if (authCode == authCodeRandom) {
+    //     // 인증버튼 비활성화
+    //     let verifyBtn = document.getElementById('verifyBtn');
+    //     verifyBtn.disabled = true;
+    //     // 인증버튼 삭제
+    //     authBox.innerHTML = "인증되었습니다.";
+    //     // 타이머 종료
+    //     clearInterval(interval);
+    //     // 인증버튼 활성화
+    //     authBtn.disabled = false;
+    // } else {
+    //     alert("인증번호 불일치");
+    //     // 인증버튼 비활성화
+    //     let verifyBtn = document.getElementById('verifyBtn');
+    //     verifyBtn.disabled = true;
+    // }
+    // 위 코드들은 보안에 취약하므로 자바백엔드에서 API 통신 처리해야 함.
+    // 인증 번호 요청 구현
+    // 1. AuthController 에서 인증 번호 요청 구현
+    // GET, /auth/code 
+    // 줘야할 매개변수: x
+    // 받아야할 매개변수: 성공/실패 여부 
+    // 2. AuthService 에서 인증 번호 요청 구현
+    // 숫자 형식의 난수 6자리 생성
+    // 인증 번호 인증 구현 
+    // 3. AuthController 에서 인증 번호 인증 구현
+    // POST, /auth/check
+    // 줘야할 매개변수: authCodeInput
+    // 받아야할 매개변수: true는 인증 성공, false는 인증 실패
+    // 4. AuthService 에서 인증 번호 인증 구현
+    // 요청시 생성된 인증번호의 비교 
+
+    // AJAX 통신 
+    $.ajax({
+        async: false, // 동기식
+        method: "post", // 요청 방식
+        url: "/auth/check", // 요청 URL
+        data: {
+            authCodeInput: authCodeInput
+        },
+        success: (result) => {
+            if (result) {
+                // 인증버튼 비활성화
+                let verifyBtn = document.getElementById('verifyBtn');
+                verifyBtn.disabled = true;
+                // 인증버튼 삭제
+                authBox.innerHTML = "인증되었습니다.";
+                // 타이머 종료
+                clearInterval(interval);
+                // 인증버튼 활성화
+                authBtn.disabled = false;
+            } else {
+                if (authCodeInput == "") {
+                    alert("인증번호를 입력하세요.");
+                } else {
+                    alert("인증번호가 불일치합니다.");
+                }
+            }
+        }
+    });
+}
+
 // 이메일 유효성 검사 
 function emailCheck() {
+    console.log("emailCheck()");
+    // 인증버튼 비활성화
+    authBtn.disabled = true;
     let email = document.querySelector('#email').value;
     let emailCheckBox = document.querySelector('#emailCheckBox');
     let emailReg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
     if (emailReg.test(email)) {
         console.log("이메일 적합");
         emailCheckBox.innerHTML = "이메일이 적합합니다.";
+        // 이메일 중복검사 생략
+        // 이메일 인증검사
+        // 인증버튼 활성화 
+        authBtn.disabled = false;
         return;
     } else {
         console.log("이메일 부적합");
