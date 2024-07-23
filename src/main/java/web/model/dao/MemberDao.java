@@ -1,8 +1,10 @@
 package web.model.dao;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import web.model.dto.MemberDto;
 
+@Slf4j
 @Component
 public class MemberDao extends Dao {
     // 회원가입 dao
@@ -19,7 +21,7 @@ public class MemberDao extends Dao {
             ps.executeUpdate();
             return true;
         } catch (final Exception e) {
-            System.out.println(e);
+            log.error("e: ", e);
         } // try end
         return false;
     } // mSignup end
