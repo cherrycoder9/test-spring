@@ -138,10 +138,21 @@ public class MemberDao extends Dao {
     public boolean mWithdraw(MemberDto mDto) {
         System.out.println("MemberDao.mWithdraw");
         try {
-            final String sql = "delete from member where no =?";
+            // 비밀번호와 회원번호 검증 후 맞으면 회원탈퇴 성공 처리
+            final String sql = "select * from member where no =? and pw =?";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, mDto.getNo());
-            return ps.executeUpdate() == 1;
+            ps.setString(2, mDto.getPw());
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                final String sql2 = "delete from member where no =?";
+                ps = conn.prepareStatement(sql2);
+                ps.setInt(1, mDto.getNo());
+                return ps.executeUpdate() == 1;
+            }
+
         } catch (final Exception e) {
             System.out.println(e);
         }
