@@ -115,6 +115,10 @@ function doAuth() {
         async: false, // 동기식 
         method: "get", // 요청 방식
         url: "/auth/code", // 요청 URL
+        // 입력받은 이메일을 전송 
+        data: {
+            "email": document.querySelector('#email').value
+        },
         success: (result) => {
             if (result) {
                 alert("인증 번호가 전송되었습니다.");

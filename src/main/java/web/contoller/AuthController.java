@@ -15,9 +15,10 @@ public class AuthController {
 
     // 인증번호 생성 요청 controller
     @GetMapping("code")
-    public boolean generateCode() {
+    public boolean generateCode(final String email) {
         System.out.println("AuthController.generateCode");
-        return authService.generateCode();
+        System.out.println("Controller email = " + email);
+        return authService.generateCode(email);
     }
 
     // 인증번호 입력값 검증 controller
